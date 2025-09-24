@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::tech-challenge-bovespa-*",
+        "arn:aws:s3:::tech-challenge-bovespa-*/raw/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::tech-challenge-bovespa-*/refined/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase",
+        "glue:CreateDatabase",
+        "glue:GetTable",
+        "glue:CreateTable",
+        "glue:UpdateTable",
+        "glue:DeleteTable",
+        "glue:GetPartition",
+        "glue:CreatePartition",
+        "glue:UpdatePartition",
+        "glue:DeletePartition",
+        "glue:BatchCreatePartition",
+        "glue:BatchDeletePartition"
+      ],
+      "Resource": [
+        "arn:aws:glue:*:*:catalog",
+        "arn:aws:glue:*:*:database/tech_challenge_bovespa",
+        "arn:aws:glue:*:*:table/tech_challenge_bovespa/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:log-group:/aws-glue/*"
+      ]
+    }
+  ]
+}

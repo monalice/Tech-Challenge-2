@@ -1,0 +1,37 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "glue:StartJobRun",
+        "glue:GetJobRun",
+        "glue:GetJob"
+      ],
+      "Resource": [
+        "arn:aws:glue:*:*:job/tech-challenge-bovespa-etl"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:GetObjectMetadata"
+      ],
+      "Resource": [
+        "arn:aws:s3:::tech-challenge-bovespa-*/raw/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:*"
+      ]
+    }
+  ]
+}

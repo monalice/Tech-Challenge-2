@@ -1,0 +1,14 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and adjust values as needed
+
+# AWS Configuration
+aws_region = "us-east-1"
+
+# Project Configuration  
+project_name = "tech-challenge-bovespa"
+environment  = "dev"
+project_owner = "your-name"
+
+# Optional: Override defaults
+# aws_region = "us-west-2"
+# environment = "prod"
