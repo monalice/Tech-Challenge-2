@@ -39,6 +39,7 @@ tech-challenge-bovespa-{nome}/
 ### Roles Necessárias
 
 #### 1. GlueServiceRole
+
 - **Propósito**: Executar jobs do Glue
 - **Permissões**:
   - `s3:GetObject` em `arn:aws:s3:::tech-challenge-bovespa-*/raw/*`
@@ -47,6 +48,7 @@ tech-challenge-bovespa-{nome}/
   - `logs:CreateLogGroup`, `logs:CreateLogStream`, `logs:PutLogEvents`
 
 #### 2. LambdaExecutionRole
+
 - **Propósito**: Executar função Lambda e iniciar jobs Glue
 - **Permissões**:
   - `glue:StartJobRun`

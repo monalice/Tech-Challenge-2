@@ -30,41 +30,47 @@ Este projeto implementa um pipeline de dados batch para processamento de dados d
 ├── fase2-lambda/              # Função Lambda para triggers
 ├── fase3-glue/                # Jobs ETL do AWS Glue
 ├── fase4-athena/              # Consultas SQL do Athena
-├── iac-terraform/             # Infraestrutura como código
+├── setup-aws/                 # Configuração AWS (roteiro original)
 └── docs/                      # Documentação adicional
 ```
 
 ## Fases de Implementação
 
-### Fase 0: Planejamento e Configuração do Ambiente AWS
+### ✅ Fase 0: Planejamento e Configuração do Ambiente AWS
+
 - ✅ Desenho da arquitetura
-- ⏳ Configuração do bucket S3
-- ⏳ Configuração de permissões IAM
+- ✅ Scripts de configuração AWS (setup-aws/)
 
-### Fase 1: Extração e Ingestão dos Dados Brutos
-- ⏳ Script de extração usando yfinance
-- ⏳ Salvamento em formato Parquet particionado
+### ✅ Fase 1: Extração e Ingestão dos Dados Brutos
 
-### Fase 2: Gatilho com AWS Lambda
-- ⏳ Função Lambda para processar eventos S3
-- ⏳ Configuração de triggers
+- ✅ Script de extração usando yfinance
+- ✅ Salvamento em formato Parquet particionado
 
-### Fase 3: Transformação e Catalogação com AWS Glue
-- ⏳ Job ETL com transformações obrigatórias
-- ⏳ Catalogação automática de dados
+### ✅ Fase 2: Gatilho com AWS Lambda
 
-### Fase 4: Consulta e Análise com AWS Athena
-- ⏳ Configuração de consultas SQL
-- ⏳ Validação do pipeline
+- ✅ Função Lambda para processar eventos S3
+- ✅ Configuração de triggers automatizada
+
+### ✅ Fase 3: Transformação e Catalogação com AWS Glue
+
+- ✅ Job ETL com transformações obrigatórias
+- ✅ Catalogação automática de dados
+
+### ✅ Fase 4: Consulta e Análise com AWS Athena
+
+- ✅ Configuração de consultas SQL
+- ✅ Validação do pipeline
 
 ## Requisitos Técnicos
 
 ### Python Dependencies
+
 ```bash
 pip install yfinance pandas boto3 pyarrow awswrangler
 ```
 
 ### AWS Services Utilizados
+
 - **S3**: Data Lake (raw e refined)
 - **Lambda**: Orquestração e triggers
 - **Glue**: ETL e catalogação
@@ -73,10 +79,39 @@ pip install yfinance pandas boto3 pyarrow awswrangler
 
 ## Como Executar
 
-1. Configure suas credenciais AWS
-2. Execute o Terraform para provisionar a infraestrutura
-3. Execute o script de extração de dados
-4. Monitore o pipeline através do CloudWatch
+### 🎯 Implementação Básica (Recomendada)
+
+Siga exatamente o roteiro do Tech Challenge:
+
+#### 1. Configure o Ambiente AWS
+
+```bash
+# Siga o passo-a-passo em setup-aws/
+cd setup-aws
+# Execute os scripts de configuração manual
+```
+
+#### 2. Execute a Extração
+
+```bash
+cd fase1-extracao
+pip install -r requirements.txt
+python extractor.py --bucket seu-bucket-name
+```
+
+#### 3. Monitore o Pipeline
+
+- Lambda será acionada automaticamente
+- Job Glue processará os dados
+- Consulte via Athena
+
+### 🚀 Implementação Avançada (Opcional)
+Para deploy automatizado com Terraform:
+
+```bash
+cd extras-avancado/iac-terraform
+# Siga instruções específicas do Terraform
+```
 
 ## Transformações Implementadas
 

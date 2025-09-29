@@ -1,0 +1,11 @@
+# Dependências para desenvolvimento/teste local do código Glue
+# Use apenas se precisar testar a lógica ETL localmente
+
+pyspark==3.3.0
+boto3==1.34.144
+pandas==2.1.4
+pyarrow==14.0.2
+
+# Para simular ambiente Glue localmente
+# awsglue-libs (biblioteca não oficial para desenvolvimento)
+# Instale com: pip install awsglue-libs

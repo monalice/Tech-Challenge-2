@@ -72,7 +72,7 @@ SELECT
 FROM tech_challenge_bovespa.dados_refinados_petr4_sa
 WHERE data >= DATE '2025-09-01'
 GROUP BY ticker, EXTRACT(YEAR FROM data), EXTRACT(MONTH FROM data), 
-         volume_medio_mensal, dias_negociacao, primeira_data_mes, ultima_data_mes
+        volume_medio_mensal, dias_negociacao, primeira_data_mes, ultima_data_mes
 ORDER BY ano, mes;
 
 -- Verificar Transformação B: Colunas renomeadas

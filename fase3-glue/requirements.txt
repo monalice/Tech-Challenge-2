@@ -1,0 +1,12 @@
+# AWS Glue Job Dependencies
+# Nota: awsglue e pyspark são pré-instalados no ambiente AWS Glue
+# Este arquivo é apenas para referência - não instale localmente
+
+# Para desenvolvimento/teste local (opcional):
+# pyspark==3.3.0
+# boto3==1.34.144
+
+# Para AWS Glue Job (automático):
+# - awsglue (pré-instalado)
+# - pyspark (pré-instalado) 
+# - boto3 (pré-instalado)

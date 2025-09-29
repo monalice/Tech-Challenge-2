@@ -19,12 +19,31 @@ Script principal do job Glue que implementa:
 - Logs detalhados de execução
 - Tratamento robusto de erros
 
-### 2. glue-service-policy.json
+### 2. requirements.txt
+**IMPORTANTE**: As dependências `awsglue` e `pyspark` são **pré-instaladas** no ambiente AWS Glue.
+- **Não instale localmente**: Causará erro pois não estão disponíveis via pip
+- **Para desenvolvimento local**: Use `requirements-dev.txt` (opcional)
+
+### 3. glue-service-policy.json
 Política IAM com permissões para:
 - Leitura de dados brutos no S3
 - Escrita de dados refinados no S3
 - Operações no Glue Data Catalog
 - Criação de logs no CloudWatch
+
+## Desenvolvimento Local (Opcional)
+
+Se você quiser testar a lógica ETL localmente:
+
+```bash
+# Instalar dependências de desenvolvimento
+pip install -r requirements-dev.txt
+
+# Ou instalar PySpark diretamente
+pip install pyspark==3.3.0 boto3 pandas pyarrow
+```
+
+**Nota**: O código completo só funcionará no ambiente AWS Glue devido às bibliotecas específicas.
 
 ## Configuração do Job
 

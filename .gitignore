@@ -1,12 +1,50 @@
+# Tech Challenge Bovespa specific
+outputs.json
+lambda_function.zip
+terraform.tfvars
+!terraform.tfvars.example
+data/
+temp/
+test_data/
+credentials.json
+config.json
+*.pem
+*.key
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.*
+.terraform/
+.terraform.lock.hcl
+
+# AWS
+.aws/
+
+# Logs
+*.log
+logs/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Original .gitignore content follows:
+# =======================================================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/

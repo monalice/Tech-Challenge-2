@@ -133,10 +133,10 @@ def apply_transformations(df: DataFrame) -> DataFrame:
     
     # Transformação B: Renomear colunas conforme especificado
     df_renamed = df.withColumnRenamed("abertura", "Abertura") \
-                   .withColumnRenamed("maxima", "Maxima_Dia") \
-                   .withColumnRenamed("minima", "Minima_Dia") \
-                   .withColumnRenamed("fechamento", "Fechamento") \
-                   .withColumnRenamed("volume", "Volume")
+                    .withColumnRenamed("maxima", "Maxima_Dia") \
+                    .withColumnRenamed("minima", "Minima_Dia") \
+                    .withColumnRenamed("fechamento", "Fechamento") \
+                    .withColumnRenamed("volume", "Volume")
     
     # Transformação C: Cálculo temporal - Média móvel de 7 dias
     window_spec = Window.partitionBy("ticker") \
@@ -157,8 +157,8 @@ def apply_transformations(df: DataFrame) -> DataFrame:
     
     # Adicionar colunas de metadados do processamento
     df_final = df_final.withColumn("data_processamento", current_timestamp()) \
-                       .withColumn("versao_processamento", lit("1.0")) \
-                       .withColumn("algoritmo_media_movel", lit("7_dias_simples"))
+                        .withColumn("versao_processamento", lit("1.0")) \
+                        .withColumn("algoritmo_media_movel", lit("7_dias_simples"))
     
     # Ordenar por ticker e data
     df_final = df_final.orderBy("ticker", "data")
