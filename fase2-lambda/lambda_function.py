@@ -132,24 +132,46 @@ def extract_file_metadata(object_key: str) -> Dict[str, Any]:
     
     metadata = {
         'full_path': object_key,
-        'filename': parts[-1] if parts else None
+        'filename': parts[-1] if parts else None,
+        'ano': None,
+        'mes': None,
+        'dia': None,
+        'ticker': None
     }
     
-    # Extrair partições
+    # Extrair partições do caminho
     for part in parts:
         if '=' in part:
             key, value = part.split('=', 1)
             try:
+                # Converter para inteiro se for numérico
                 metadata[key] = int(value) if value.isdigit() else value
-            except ValueError:
+            except (ValueError, AttributeError):
                 metadata[key] = value
     
     # Extrair ticker do nome do arquivo se possível
     if metadata.get('filename'):
         filename = metadata['filename']
-        if '_' in filename:
-            potential_ticker = filename.split('_')[0]
+        # Remover extensão
+        filename_without_ext = filename.replace('.parquet', '')
+        
+        # Tentar extrair ticker (formato: TICKER_DATA.parquet)
+        if '_' in filename_without_ext:
+            potential_ticker = filename_without_ext.split('_')[0]
             metadata['ticker'] = potential_ticker
+        else:
+            # Se não tiver underscore, usar o nome completo sem extensão
+            metadata['ticker'] = filename_without_ext
+    
+    # Se não conseguiu extrair ano/mes/dia do caminho, tentar do nome do arquivo
+    if not metadata.get('ano') and metadata.get('filename'):
+        # Tentar extrair data do formato TICKER_YYYY-MM-DD.parquet
+        import re
+        date_match = re.search(r'(\d{4})-(\d{2})-(\d{2})', metadata['filename'])
+        if date_match:
+            metadata['ano'] = int(date_match.group(1))
+            metadata['mes'] = int(date_match.group(2))
+            metadata['dia'] = int(date_match.group(3))
     
     logger.info(f"Metadados extraídos: {metadata}")
     return metadata
@@ -168,16 +190,22 @@ def start_glue_job(bucket_name: str, object_key: str, metadata: Dict[str, Any]) 
     """
     job_name = os.environ.get('GLUE_JOB_NAME', 'tech-challenge-bovespa-etl')
     
+    # Garantir valores padrão para evitar argumentos vazios
+    partition_year = str(metadata.get('ano', '2025'))
+    partition_month = str(metadata.get('mes', '01')).zfill(2)
+    partition_day = str(metadata.get('dia', '01')).zfill(2)
+    ticker = metadata.get('ticker', 'UNKNOWN')
+    
     # Parâmetros para o job do Glue
     job_parameters = {
         '--source_bucket': bucket_name,
         '--source_key': object_key,
         '--target_bucket': bucket_name,
         '--target_prefix': 'refined/',
-        '--partition_year': str(metadata.get('ano', '')),
-        '--partition_month': str(metadata.get('mes', '')),
-        '--partition_day': str(metadata.get('dia', '')),
-        '--ticker': metadata.get('ticker', ''),
+        '--partition_year': partition_year,
+        '--partition_month': partition_month,
+        '--partition_day': partition_day,
+        '--ticker': ticker,
         '--execution_time': datetime.now().isoformat()
     }
     

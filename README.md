@@ -79,7 +79,32 @@ pip install yfinance pandas boto3 pyarrow awswrangler
 
 ## Como Executar
 
-### 🎯 Implementação Básica (Recomendada)
+### 🚀 Opção 1: Setup Automatizado (AWS Academy)
+
+**Recomendado para ambientes AWS Academy!**
+
+Utilize os scripts automatizados para configurar toda a infraestrutura:
+
+```bash
+# 1. Execute o setup para criar todos os recursos
+./setup.sh
+
+# 2. Execute a extração de dados
+cd fase1-extracao
+pip install -r requirements.txt
+python b3_scraper_new.py --bucket tech-challenge-bovespa-SEU-SUFIXO --save-s3
+
+# 3. Verifique os dados no Athena (AWS Console)
+
+# 4. Ao finalizar, execute o cleanup
+./cleanup.sh
+```
+
+📖 **Documentação completa dos scripts:**
+- [SCRIPTS_README.md](SCRIPTS_README.md) - Guia completo de uso
+- [WINDOWS_SETUP_GUIDE.md](WINDOWS_SETUP_GUIDE.md) - Instruções específicas para Windows
+
+### 🎯 Opção 2: Setup Manual (Configuração Tradicional)
 
 Siga exatamente o roteiro do Tech Challenge:
 
@@ -96,7 +121,7 @@ cd setup-aws
 ```bash
 cd fase1-extracao
 pip install -r requirements.txt
-python extractor.py --bucket seu-bucket-name
+python b3_scraper_new.py --bucket seu-bucket-name --save-s3
 ```
 
 #### 3. Monitore o Pipeline

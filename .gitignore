@@ -10,6 +10,8 @@ credentials.json
 config.json
 *.pem
 *.key
+.env.aws
+notification.json
 
 # Terraform
 *.tfstate
